@@ -77,6 +77,12 @@ class Student(UserProfile):
     #avatar = models.FileField()
     roll_no = models.CharField(max_length=24)
     register_no = models.CharField(max_length=24)
+ 
+class Professor(UserProfile):
+    professor = models.OneToOneField(UserProfile,related_name='professor')
+    working = models.ManyToManyField(College, through='Teaching') 
+    address = models.ForeignKey(Address)
+    prof_id = models.CharField(max_length=24)
 
 class Education(models.Model):
     YEAR_IN = (
@@ -88,20 +94,13 @@ class Education(models.Model):
     BRANCHES = (
         ('aero', 'Aeronautics'),
         ('auto', 'Automobile'),
-        ('cs', 'Compputer Science'),
+        ('cs', 'Computer Science'),
         ('civ', 'Civil'),
         ('eee', 'Electrical and Electronics'),
         ('ece', 'Electronics and Communication'),
         ('it', 'Information Technology'),
         ('mech', 'Mechanical'),
-        ('mecht', 'Mechanicatronics'),
-        ('eee', 'EEE'),
-        ('cs', 'CS'),
-        ('it', 'IT'),
-        ('mech', 'MECH'),
-        ('eee', 'EEE'),
-        ('cs', 'CS'),
-        ('it', 'IT'),
+        ('mecht', 'Mechatronics'),
     )
     college = models.ForeignKey(College)
     student = models.ForeignKey(Student)
@@ -122,6 +121,31 @@ class SkillSet(models.Model):
     rating = models.CharField(max_length=8, choices=RATING)
     best_score = models.CharField(max_length=8, choices=RATING)
     last_score = models.CharField(max_length=8, choices=RATING)
+    
+class Teaching(models.Model):
+    BRANCHES = (
+        ('aero', 'Aeronautics'),
+        ('auto', 'Automobile'),
+        ('cs', 'Computer Science'),
+        ('civ', 'Civil'),
+        ('eee', 'Electrical and Electronics'),
+        ('ece', 'Electronics and Communication'),
+        ('it', 'Information Technology'),
+        ('mech', 'Mechanical'),
+        ('mecht', 'Mechatronics'),
+    )
+    SUBJECTS = (
+        ('maths', 'Maths'),
+        ('ed', 'Engineering Drawing'),
+        ('atd', 'Applied Thermodynamics'),
+        ('pe', 'Power Electronics'),
+    )
+    college = models.ForeignKey(College)
+    professor = models.ForeignKey(Professor)
+    date_of_joining = models.DateTimeField()
+    date_left = models.DateTimeField()
+    subject = models.CharField(max_length=2, choices=SUBJECTS)
+    branch = models.CharField(max_length=8, choices=BRANCHES)
 
 class Employer(UserProfile):
     employer = models.OneToOneField(UserProfile,related_name='employer') 
