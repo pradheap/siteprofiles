@@ -1,4 +1,3 @@
-from profiles import views as profile_views
 from siteprofiles.forms import ProfileForm, 
 from django.contrib.auth.models import User
 from siteProfiles.models import UserProfile

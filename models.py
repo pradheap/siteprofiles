@@ -31,7 +31,6 @@ class Address(models.Model):
     country = models.CharField(max_length=24)
     phone = models.CharField(max_length=16)
     
-
 class College(models.Model):
     AFFILIATION = (
         ('anna_univ', 'Anna University'),
@@ -75,6 +74,11 @@ class Student(UserProfile):
     #resume = models.FileField()
     dob = models.DateTimeField()
     #avatar = models.FileField()
+    #profile_photo = models.FileField()
+    #tenth_certificate = models.FileField()
+    #hsc_certificate = models.FileField()
+    tenth_percentage = models.CharField(max_length=5)
+    hsc_percentage = models.CharField(max_length=5)
     roll_no = models.CharField(max_length=24)
     register_no = models.CharField(max_length=24)
  
