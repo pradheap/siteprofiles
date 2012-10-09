@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
-from siteprofiles.models import UserProfile, Student
+from siteprofiles.models import *
 
 from registration import signals
 from registration.forms import RegistrationForm
@@ -42,19 +42,27 @@ class RegBackend(object):
                                                                     password, site)
         signals.user_registered.send(sender=self. __class__, user=new_user, request=request)
         u = User.objects.get(username=new_user.username)
-        u.first_name = kwargs['first_name']
-        u.last_name = kwargs['last_name']
+        #u.first_name = kwargs['first_name']
+        #u.last_name = kwargs['last_name']
         u.save() 
+        person = request.REQUEST['persontype']
         # In case of multi-table inheritance, we don't need a userprofile object to be saved 
         #up = UserProfile(user=u)
         #up.first_name = kwargs['first_name']
         #up.save()
         #upp = UserProfile.objects.get(user=u)
-        st = Student(user=u)
-        st.first_name = kwargs['first_name']
-        st.last_name = kwargs['last_name']
-        st.reg_no = kwargs['reg_no']
-        st.save()
+        if person == 'student':
+	        st = Student(user=u)
+	        #st.first_name = kwargs['first_name']
+	        #st.last_name = kwargs['last_name']
+	        #st.reg_no = kwargs['reg_no']
+	        st.save()
+        elif person == 'employer':
+	        emp = Employer(user=u)
+	        emp.save()
+        elif person == 'professor':
+	        prof = Professor(user=u)
+	        prof.save()
         return new_user
         
     def registration_allowed(self, request):
