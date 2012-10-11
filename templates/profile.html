@@ -5,7 +5,7 @@
 <h1>Login</h1>
 
 {% if user.is_authenticated %}
-My name is, ({{ user.username }}). My First name is {{user.first_name}} 
+My name is, ({{ user.username }}). My First name is {{user.get_profile.last_name}} 
 <br/>
 My Profile First name is {{user.get_profile.first_name}} 
 <br/>

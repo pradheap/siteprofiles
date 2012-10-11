@@ -91,7 +91,7 @@
 		
 		<script type="text/javascript">
 		$(document).ready(function() {
-	    	$(".tabs .tab[id^=tab_menu]").hover(function() {
+	    	$(".tabs .tab[id^=tab_menu]").click(function() {
 	        var curMenu=$(this);
 	        $(".tabs .tab[id^=tab_menu]").removeClass("selected");
 	        curMenu.addClass("selected");

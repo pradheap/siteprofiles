@@ -5,36 +5,22 @@ from siteprofiles.models import *
 from registration.forms import RegistrationForm
  
 class ProfileForm(ModelForm):
+		def __init__(self, *args, **kwargs):
+			super(ProfileForm, self).__init__(*args, **kwargs)
+    		try:
+    			self.fields['first_name'].initial = Student.objects.get(user = self.instance.user).first_name
+    			self.fields['last_name'].initial =  Student.objects.get(user = self.instance.user).last_name
+    			#self.fields['reg_no'].initial = Student(user = self.instance.user).reg_no
+    		except User.DoesNotExist:
+        		pass
+
+			#email = forms.EmailField(label="Primary email",help_text='')
+			#reg_no = forms.CharField(label="Reg No:",help_text='')
  
-    def __init__(self, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
-        try:
-            self.fields['email'].initial = self.instance.user.email
-            self.fields['first_name'].initial = UserProfile(user = self.instance.user).first_name
-            self.fields['last_name'].initial = self.instance.user.last_name
-            self.fields['reg_no'].initial = Student(user = self.instance.user).reg_no
-        except User.DoesNotExist:
-            pass
- 
-    email = forms.EmailField(label="Primary email",help_text='')
-    first_name = forms.CharField(label="First Name",help_text='')
-    last_name = forms.CharField(label="Last Name",help_text='')
-    reg_no = forms.CharField(label="Reg No:",help_text='')
- 
-    class Meta:
-      model = UserProfile
-      exclude = ('user',)        
- 
-    def save(self, *args, **kwargs):
-        """
-        Update the primary email address on the related User object as well.
-        """
-        u = self.instance.user
-        u.email = self.cleaned_data['email']
-        u.save()
-        profile = super(ProfileForm, self).save(*args,**kwargs)
-        return profile
-        
+		class Meta:
+			model = Student
+			exclude = ('student','user','study','skills')        
+               
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
