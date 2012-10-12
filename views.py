@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login
 from django.template import RequestContext
 from django.shortcuts import redirect
  
+
+# Function for Editing a User Profile
 def edit_profile(request):
     uname = request.user
     st = Student.objects.get(user=uname)
@@ -16,39 +18,19 @@ def edit_profile(request):
     	form = StudentForm(request.POST,instance=st)
     else:
     	form = StudentForm(instance=st)
-	#if request.method == 'POST': # If the form has been submitted...
-	 # 	u = request.user
-	#	st = Student.objects.get(user=u)
-	#	form = ProfileForm(request.POST) # A form bound to the POST data
-     #   if form.is_valid():
-    """
-    Update the primary email address on the related User object as well.
-    """
     if form.is_valid():
     	form.save()
     	return redirect('/profile/detail') 
     else:
     	return render_to_response('edit_profile.html',{'form':form}, context_instance=RequestContext(request))
-	  #      st.first_name =  form.cleaned_data['first_name'] 
-	   #     st.last_name =  form.cleaned_data['last_name']
-	        #st.reg_no =  form.cleaned_data['reg_no']
-	    #    st.save()
-	        #u.email = self.cleaned_data['email']
-	        #u.save()
-	        #profile = super(ProfileForm, self).save(*args,**kwargs)
-	     #   return HttpResponseRedirect('/profile/detail')
-   	#else:
-   	#    u = request.user
-   	    #st = Student.objects.get(user=u)
-   	 #   form = ProfileForm()
-   	#backend.EditProfile(request, **kwargs)
-	
-
+    	
+# Function for Viewing a User Profile
 def view_profile(request):
 	uname = request.user
 	st = Student.objects.get(user=uname)
  	return render_to_response('profile_detail.html', {'st':st}, context_instance=RequestContext(request))
   
+# Separate function for Login. (May be remove it later or modify it)
 def login_user(request):
     state = "Please log in below..."
     username = password = ''
