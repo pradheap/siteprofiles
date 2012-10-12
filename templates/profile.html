@@ -9,7 +9,7 @@ My name is, ({{ user.username }}). My First name is {{user.get_profile.last_name
 <br/>
 My Profile First name is {{user.get_profile.first_name}} 
 <br/>
-My Student Reg no.: {{user.get_profile.student.reg_no}} 
+My Student Reg no.: {{user.get_profile.Student.reg_no}} 
 <a href="{% url auth_logout %}">Logout</a>
 
 {% endif %}
