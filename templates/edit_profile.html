@@ -3,7 +3,21 @@
  
 {% block content %}
 <h1>Edit contact info for {{ user }}</h1>
-<form action="" method="POST">{% csrf_token %}
-{{ form }} <input id="submit" type="submit" name="submit" value="Update" /></form>
+    <div class="tabcontent" style="display:block">
+        <form method="post" action="" class="accountForm marginTop">{% csrf_token %}<!-- Added due to internal url-->
+		   <div id="student-profile" style="width:400px;background-color:#aaa;margin-top:30px;margin-left:582px">
+			{% for field in form %}
+			<div style="width:400px;padding:15px;">
+		            <div class="hint {%if field.field.required %} bold {% endif %}" style="clear:both;width:40%;display:inline-block">{{ field.label_tag }}</div>
+					<div style="display:inline">{{ field }}</div>
+			</div>
+					{% if field.help_text %}<span>{{ field.help_text }}</span>{% endif %}
+					{% if field.errors %}<span>{{ field.errors }}</span>{% endif %}
+			{% endfor %}
+			<input type="hidden" name="persontype" value="student"/>
+			<input type="submit" value="Update" class="submit" style="width:100px;margin:0px auto;display:block;height:32px;">
+			</div>
+		</form>
+    </div>
  
 {% endblock content %}

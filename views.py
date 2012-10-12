@@ -44,8 +44,10 @@ def edit_profile(request):
    	#backend.EditProfile(request, **kwargs)
 	
 
-#def create_profile(request):
- # return profile_views.create_profile(request, form_class=ProfileForm)
+def view_profile(request):
+	uname = request.user
+	st = Student.objects.get(user=uname)
+ 	return render_to_response('profile_detail.html', {'st':st}, context_instance=RequestContext(request))
   
 def login_user(request):
     state = "Please log in below..."
