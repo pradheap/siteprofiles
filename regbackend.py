@@ -8,6 +8,7 @@ from registration import signals
 from registration.forms import RegistrationForm
 from registration.models import RegistrationProfile    
     
+# Class copied and extended from standard Django-registration app
 class RegBackend(object):    
     def register(self, request, **kwargs):
         """
@@ -53,9 +54,6 @@ class RegBackend(object):
         #upp = UserProfile.objects.get(user=u)
         if person == 'student':
 	        st = Student(user=u)
-	        #st.first_name = kwargs['first_name']
-	        #st.last_name = kwargs['last_name']
-	        #st.reg_no = kwargs['reg_no']
 	        st.save()
         elif person == 'employer':
 	        emp = Employer(user=u)
