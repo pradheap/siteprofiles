@@ -1,13 +1,10 @@
-from django.db import models
 from django.forms import ModelForm
 from django import forms
 from siteprofiles.models import *
-from registration.forms import RegistrationForm
           
-class UserProfileForm(forms.ModelForm):
+class AddressForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
-        exclude = ('user',)
+        model = Address
         
 class EmployerForm(forms.ModelForm):
     class Meta:
@@ -20,6 +17,13 @@ class ProfessorForm(forms.ModelForm):
         exclude = ('professor','address','user',)
         
 class StudentForm(forms.ModelForm):
+    dob = forms.DateField(('%d/%m/%Y',), label='Date of Birth', required=False,  
+        widget=forms.DateTimeInput(format='%d/%m/%Y', attrs={
+            'class':'input',
+            'readonly':'readonly',
+            'size':'15'
+        })
+    )
     class Meta:
         model = Student
         exclude = ('student','user','skills','address','study')

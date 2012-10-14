@@ -80,8 +80,6 @@ class Student(UserProfile):
     #hsc_certificate = models.FileField()
     tenth_percentage = models.CharField(max_length=5, null=True, blank=True)
     hsc_percentage = models.CharField(max_length=5, null=True, blank=True)
-    roll_no = models.CharField(max_length=24, null=True, blank=True)
-    register_no = models.CharField(max_length=24, null=True, blank=True)
  
 class Professor(UserProfile):
     professor = models.OneToOneField(UserProfile,related_name='professor')
@@ -109,8 +107,10 @@ class Education(models.Model):
     )
     college = models.ForeignKey(College, null=True, blank=True)
     student = models.ForeignKey(Student, null=True, blank=True)
-    date_of_joining = models.DateTimeField(null=True, blank=True)
-    date_of_pass = models.DateTimeField(null=True, blank=True)
+    roll_no = models.CharField(max_length=24, null=True, blank=True)
+    register_no = models.CharField(max_length=24, null=True, blank=True)
+    doj = models.CharField(max_length=4, null=True, blank=True)
+    dop = models.CharField(max_length=4, null=True, blank=True)
     year = models.CharField(max_length=2, choices=YEAR_IN, null=True, blank=True)
     branch = models.CharField(max_length=8, choices=BRANCHES, null=True, blank=True)
     
