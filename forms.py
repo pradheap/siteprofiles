@@ -15,6 +15,11 @@ class ProfessorForm(forms.ModelForm):
     class Meta:
         model = Professor
         exclude = ('professor','address','user',)
+   
+class CollegeForm(forms.ModelForm):
+    class Meta:
+        model = College
+        exclude = ('address',)
         
 class StudentForm(forms.ModelForm):
     dob = forms.DateField(('%d/%m/%Y',), label='Date of Birth', required=False,  

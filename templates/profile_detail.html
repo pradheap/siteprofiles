@@ -44,8 +44,21 @@
 		<div class="profile-field-label">Blog:</div>
 		<div class="profile-field-value">{{ addr.blog }}</div>
 	<h3>Education</h3>
+	{% for education in edu%}
+		<h3>College Details</h3>
 		<div class="profile-field-label">Register No</div>
-		<div class="profile-field-value">{{ edu.register_no }}</div>
+		<div class="profile-field-value">{{ education.register_no }}</div>
+		<div class="profile-field-label">Roll No</div>
+		<div class="profile-field-value">{{ education.roll_no }}</div>
+		<div class="profile-field-label">Current Year:</div>
+		<div class="profile-field-value">{{ education.year }}</div>
+		<div class="profile-field-label">Date of Joining</div>
+		<div class="profile-field-value">{{ education.doj }}</div>
+		<div class="profile-field-label">Date of Pass out</div>
+		<div class="profile-field-value">{{ education.dop }}</div>
+		<div class="profile-field-label">Branch</div>
+		<div class="profile-field-value">{{ education.branch }}</div>
+	{% endfor %}
 	</div>
 {% endblock content %}
 
