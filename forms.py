@@ -29,6 +29,10 @@ class StudentForm(forms.ModelForm):
             'size':'15'
         })
     )
+    resume = forms.FileField(
+        label='Select a file to upload',
+        help_text='max. 42 megabytes'
+    )
     class Meta:
         model = Student
         exclude = ('student','user','skills','address','study')

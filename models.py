@@ -52,6 +52,9 @@ class College(models.Model):
     affiliation = models.CharField(max_length=12, choices=AFFILIATION, null=True, blank=True)
     type = models.CharField(max_length=12, choices=TYPE, null=True, blank=True)
     
+    def __unicode__(self):
+        return u'%s' % (self.name)
+    
 class Skill(models.Model):
     SKILLS = (
         ('c', 'C'),
@@ -72,7 +75,7 @@ class Student(UserProfile):
     study = models.ManyToManyField(College, through='Education')
     address = models.ForeignKey(Address,blank=True, null=True)
     passport = models.CharField(max_length=16, null=True, blank=True)
-    #resume = models.FileField()
+    resume = models.FileField(upload_to='resumes/%Y/%m/%d')
     dob = models.DateTimeField(null=True, blank=True)
     #avatar = models.FileField()
     #profile_photo = models.FileField()

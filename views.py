@@ -18,7 +18,7 @@ def edit_profile(request):
 	st = Student.objects.get(user=uname)
 	addr = st.address
 	if request.method == 'POST':
-		form = StudentForm(request.POST,instance=st)
+		form = StudentForm(request.POST,request.FILES,instance=st)
 		addr_form = AddressForm(request.POST, instance=addr)
 		if 'add_college' in request.POST:
 			cp = request.POST.copy()
@@ -28,6 +28,7 @@ def edit_profile(request):
 			if addr_form.is_valid():
 				addr = addr_form.save()
 			if form.is_valid():
+				st = Student(resume=request.FILES['resume'])
 				st = form.save(commit=False)
 				st.address = addr
 				st.save()

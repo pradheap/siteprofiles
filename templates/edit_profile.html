@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Edit Profile for {{ user }}</h1>
     <div class="tabcontent" style="display:block">
-        <form method="post" action="" class="accountForm marginTop">{% csrf_token %}<!-- Added due to internal url-->
+        <form method="post" enctype="multipart/form-data" action="" class="accountForm marginTop">{% csrf_token %}<!-- Added due to internal url-->
         		<input type="hidden" name="persontype" value="student"/>
 		<input type="submit" name="submit" value="Update" class="submit" style="width:100px;margin:0px auto;display:inline-block;height:32px;">
 		   <div class="student-profile" style="width:400px;background-color:#aaa;margin-top:30px;margin-left:50px;float:left">
